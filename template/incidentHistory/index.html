@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="static/images/logo.webp" type="image/x-icon" />
+    <title>CG Signal - Incident History</title>
+    <link rel="stylesheet" href="static/css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">C<span class="dot"></span>G</div>
+
+      <div class="status">
+        <div class="icon">🚨</div>
+        <div class="status-text">Incident History</div>
+      </div>
+      <div class="live-status">
+        <div class="header">
+          <div><strong>Last {{.NumberOfLogs}} Incidents</strong></div>
+        </div>
+        {{ range .Logs }}
+        <div class="service-box">
+          <div class="service-header">
+            <div>
+              <span class="status-icon">🚨</span>
+              <span class="service-name">{{.ErrorMessage}}</span>
+            </div>
+            <div><strong>{{.CreatedDate}}</strong></div>
+          </div>
+        </div>
+        {{ end }} {{ if .HasError }}
+        <div class="service-box error-box">
+          An error occurred while fetching incident history.
+        </div>
+        {{ end }}
+        <a href="/status" class="incident-history">Status →</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="static/images/logo.webp" type="image/x-icon" />
+    <title>CG Signal - Status</title>
+    <link rel="stylesheet" href="static/css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">C<span class="dot"></span>G</div>
+
+      <div class="status">
+        <div class="icon">{{if .IsOk}}✅{{else}}❌{{end}}</div>
+        <div class="status-text">{{.Status}}</div>
+      </div>
+
+      <div class="live-status">
+        <div class="header">
+          <div><strong>Live Status</strong></div>
+        </div>
+        <div class="service-box">
+          <div class="service-header">
+            <div>
+              <span class="status-icon">💬</span>
+              <span class="service-name">Messages - Success Rate</span>
+              {{if eq .Direction "up"}}
+              <span class="status-label up"><strong>Up</strong>⬆</span>
+              {{end}} {{if eq .Direction "down"}}
+              <span class="status-label down"><strong>Down</strong>⬇</span>
+              {{end}}
+            </div>
+            <div><strong>{{.SignalSuccess}}%</strong></div>
+          </div>
+          <div class="uptime-bars">
+            {{ range .Bars }}
+            <div class="bar {{ .Status }}"></div>
+            {{ end }}
+          </div>
+        </div>
+        <div class="service-box">
+          <div class="service-header">
+            <div>
+              <span class="status-icon">🕑</span>
+              <span class="service-name">Uptime</span>
+            </div>
+            <div><strong>{{.Uptime}}</strong></div>
+          </div>
+        </div>
+        <a href="/incident-history" class="incident-history"
+          >Incident History →</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
