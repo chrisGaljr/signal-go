@@ -3,6 +3,7 @@ FROM golang:1.25.1-alpine AS builder
 WORKDIR /app
 
 COPY template/ /app/template/
+COPY static/ /app/static/
 COPY go.mod go.sum ./
 
 RUN go mod download
@@ -31,6 +32,7 @@ WORKDIR /root/
 
 COPY --from=builder /app/main .
 COPY --from=builder /app/template ./template
+COPY --from=builder /app/static ./static
 
 RUN chown appuser:appgroup main
 RUN chown -R appuser:appgroup /root/
